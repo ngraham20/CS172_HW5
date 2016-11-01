@@ -25,24 +25,29 @@ private:
 };
 
 template<typename T>
-inline vector<T>::vector() { vectorArray = new T[] }
+inline vector<T>::vector()
+{
+	vectorArray = NULL;
+	vectorSize = 0;
+}
 
+// there is no good default to use here that would work with all GenericTypes
 template<typename T>
 inline vector<T>::vector(int size) 
 {
 	this->vectorSize = size;
 	vectorArray = new T[size];
-	for (int i = 0; i < size; i++)
-	{
-		vectorArray[i] = i;
-	}
 }
 
 template<typename T>
 inline vector<T>::vector(int size, T type) 
 {
 	this->vectorSize = size;
-	vectorArray = new T[size]{ type };
+	vectorArray = new T[size];
+	for (int i = 0; i < size; i++)
+	{
+		vectorArray[i] = type;
+	}
 }
 
 template<typename T>
@@ -51,57 +56,12 @@ inline vector<T>::~vector() { delete[] vectorArray; }
 template<typename T>
 inline void vector<T>::push_back(T newValue)
 {
-	vectorSize += 1;	T* temp = new T[vectorSize];	temp[vectorSize - 1] = newValue;	if (vectorArray != NULL) {		for (int i = 0; i < vectorSize - 1; i++)		{			temp[i] = vectorArray[i];		}		delete vectorArray;	}	vectorArray = temp;
+	vectorSize += 1;	T* temp = new T[vectorSize];	temp[vectorSize - 1] = newValue;	if (vectorArray != NULL) {		for (int i = 0; i < vectorSize - 1; i++)		{			temp[i] = vectorArray[i];		}		delete[] vectorArray;	}	vectorArray = temp;
 	for (int i = 0; i < vectorSize; i++)
 	{
 		cout << vectorArray[i] << endl;
 	}
-	//vectorSize++;
-	//T* temp = new T[vectorSize];
-	//temp[vectorSize - 1] = newValue;
-	//if (vectorArray != NULL)
-	//{
-	//	for (int i = 0; i < vectorSize - 1; i++)
-	//	{
-	//		temp[i] = vectorArray[i];
-	//	}
-	//	delete vectorArray;
-	//}
-	//vectorArray = temp;
-	//delete temp;
-	//for (int i = 0; i < vectorSize; i++)
-	//{
-	//	cout << vectorArray[i] << endl;
-	//}
 }
-
-
-
-//template<typename T>
-//inline void vector<T>::push_back(T newValue)
-//{
-//	vectorSize += 1;
-//	T* temp = new T[vectorSize];
-//	temp[vectorSize - 1] = newValue;
-//	cout << temp[vectorSize] << endl;
-//	if (vectorArray != NULL)
-//	{
-//		for (int i = 0; i < vectorSize - 1; i++)
-//		{
-//			temp[i] = vectorArray[i];
-//			cout << temp[i] << endl;
-//		}
-//		cout << temp[vectorSize] << endl;
-//		delete vectorArray;
-//	}
-//	vectorArray = temp;
-//	 cout << vectorArray[vectorSize] << endl;
-//	for (int i = 0; i < vectorSize; i++)
-//	{
-//		cout << temp[i] << endl;
-//	}
-//	delete[] temp;
-//}
 
 template<typename T>
 inline void vector<T>::pop_back()
