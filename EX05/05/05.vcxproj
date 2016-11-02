@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1DD3D6A9-9E20-4E0B-9B0D-DE31D990FB13}</ProjectGuid>
+    <ProjectGuid>{86568819-26AC-4E77-AD6A-11935A16B86C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>My04</RootNamespace>
+    <RootNamespace>My05</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -142,10 +142,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="TShuffle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
