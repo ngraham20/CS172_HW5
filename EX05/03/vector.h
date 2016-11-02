@@ -15,9 +15,12 @@ public:
 
 	int size() const;
 	T at(int);
-	bool empty() const;
+	bool isEmpty() const;
 	void clear();
 	void swap(vector&);
+
+	int getLength();
+	T* getVector();
 
 private:
 	T* vectorArray;
@@ -57,10 +60,10 @@ template<typename T>
 inline void vector<T>::push_back(T newValue)
 {
 	vectorSize += 1;	T* temp = new T[vectorSize];	temp[vectorSize - 1] = newValue;	if (vectorArray != NULL) {		for (int i = 0; i < vectorSize - 1; i++)		{			temp[i] = vectorArray[i];		}		delete[] vectorArray;	}	vectorArray = temp;
-	for (int i = 0; i < vectorSize; i++)
+	/*for (int i = 0; i < vectorSize; i++) // this code is used for testing purposes
 	{
 		cout << vectorArray[i] << endl;
-	}
+	}*/
 }
 
 template<typename T>
@@ -73,7 +76,6 @@ inline void vector<T>::pop_back()
 		temp[i] = vectorArray[i];
 	}
 	vectorArray = temp;
-	delete[] temp;
 }
 
 template<typename T>
@@ -83,11 +85,11 @@ template<typename T>
 inline T vector<T>::at(int location) { return vectorArray[location]; }
 
 template<typename T>
-inline bool vector<T>::empty() const
+inline bool vector<T>::isEmpty() const
 {
 	if (vectorSize > 0)
 	{
-		return false
+		return false;
 	}
 	return true;
 }
@@ -96,9 +98,8 @@ template<typename T>
 inline void vector<T>::clear()
 {
 	vectorSize = 0;
-	T* temp = new T[size];
+	T* temp = new T[vectorSize];
 	vectorArray = temp;
-	delete[] temp;
 }
 
 template<typename T>
@@ -108,17 +109,22 @@ inline void vector<T>::swap(vector& v2)
 	if (vectorSize >= size2)
 	{
 		T* temp = new T[vectorSize];
-		temp = vectorArray;
-		for (int i = 0; i < size2; i++)
-		{
-			vectorArray[i] = v2.at(i);
-		}
-		v2.clear();
+		// fill temp with vectorArray
 		for (int i = 0; i < vectorSize; i++)
 		{
-			v2.push_back(temp[i]);
+			temp[i] = vectorArray[i];
 		}
-		delete[] temp;
+		// delete vectorArray
+		delete[] vectorArray;
+
+		// fill vectorArray with v2
+		vectorArray = v2.getVector();
+
+		// clear v2
+		v2.~vector();
+
+		// fill v2 with temp
+		
 	}
 	else
 	{
@@ -127,12 +133,21 @@ inline void vector<T>::swap(vector& v2)
 		{
 			temp[i] = v2.at(i);
 		}
-		v2.clear();
+		for (int i = 0; i < size2; i++)
+		{
+			cout << temp[i] << endl;
+		}
+		// v2.clear();
 		for (int i = 0; i < vectorSize; i++)
 		{
 			v2.push_back(vectorArray[i]);
 		}
 		vectorArray = temp;
-		delete[] temp;
 	}
 }
+
+template<typename T>
+inline int vector<T>::getLength() { return vectorSize; }
+
+template<typename T>
+inline T* vector<T>::getVector() { return vectorArray; }
