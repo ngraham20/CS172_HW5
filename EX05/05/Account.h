@@ -1,11 +1,15 @@
 #pragma once
 #include <string>
+#include <vector>
 #include "Transaction.h"
+
 using namespace std;
 
 class Account
 {
 public:
+	static double annualInterestRate;
+
 	Account();
 	Account(string name, int ID, double balance);
 
@@ -26,6 +30,7 @@ private:
 	string name;
 	int ID;
 	double balance;
-	static double annualInterestRate;
+
+	vector<Transaction> transactions;
 };
 

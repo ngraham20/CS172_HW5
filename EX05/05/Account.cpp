@@ -4,7 +4,7 @@ Account::Account()
 {
 	ID = 0;
 	balance = 0;
-	annualInterestRate = 0;
+	// annualInterestRate = 0; this would cause ALL interest rates to drop to 0
 }
 
 Account::Account(string name, int ID, double balance)
@@ -45,12 +45,16 @@ double Account::getMonthlyInterestRate()
 
 bool Account::withdrawl(double amount)
 {
+	Transaction t1('w', amount, balance, "this is a withdrawl");
+	transactions.push_back(t1);
 	balance -= amount;
 	return true;
 }
 
 bool Account::deposit(double amount)
 {
+	Transaction t1('d', amount, balance, "this is a deposit");
+	transactions.push_back(t1);
 	balance += amount;
 	return true;
 }

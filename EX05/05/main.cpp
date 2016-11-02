@@ -2,6 +2,8 @@
 #include "Account.h"
 using namespace std;
 
+double Account::annualInterestRate = .015;
+
 int main()
 {
 	Account account1;
